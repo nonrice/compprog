@@ -6,19 +6,14 @@
 
 int solve(int* nums, int n, ll k){
     std::sort(nums, nums+n);
-    int min = nums[0];
-    for (int step=nums[0]; step>=1; step/=2){
-        while ((nums[0]-step)*1LL*n > k)
-            nums[0] -= step;
+    int steps = 0;
+    while (nums[0]*1LL*n > k){
+        nums[0] -= 1;
+        steps++;
     }
-    nums[0] -= 1;
 
-    std::cout << nums[0] << '\n';
-    std::cout << min << '\n';
-
-    int steps = min-nums[0];
     ll sum = std::accumulate(nums, nums+n, 0);
-    for (int i=n; i>0; --i){
+    for (int i=n-1; i>0; --i){
         if (sum<=k)
             break;
         sum -= nums[i]-nums[0];
