@@ -4,23 +4,21 @@
 
 #define ll long long
 
-int solve(int* nums, int n, ll k){
-    std::sort(nums, nums+n);
-    int steps = 0;
-    while (nums[0]*1LL*n > k){
-        nums[0] -= 1;
-        steps++;
-    }
-
-    ll sum = std::accumulate(nums, nums+n, 0);
+int calc_steps(int* nums, ll sum, int n, ll k, int start){
+    sum -= nums[0]-start;
+    ll steps = nums[0]-start;
     for (int i=n-1; i>0; --i){
         if (sum<=k)
-            break;
-        sum -= nums[i]-nums[0];
+            return steps;
+        sum -= nums[i]-start;
         steps++;
     }
+    return -1;
+}
 
-    return steps; 
+int solve(int* nums, int n, ll k){
+    std::sort(nums, nums+n);
+    ll sum = std::accumulate(nums, nums+n, 0);
 }
 
 int main(){
