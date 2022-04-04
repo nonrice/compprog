@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 
-#define MAXN 200000
-
 int calc_needed(const std::string& str, char a, char b){
     int seq_part = 0;
     int exc = 0;
