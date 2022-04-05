@@ -26,7 +26,7 @@ int solve(int w, int h){
         dp[r][w-1] = mat[r][w-1];
         for (int c=1; c<w-1; ++c){
             if (mat[r][c])
-                dp[r][c] = std::min({dp[r+1][c-1], dp[r+1][c], dp[r+1][c+1]})+1;
+                dp[r][c]=std::min({dp[r+1][c-1], dp[r+1][c], dp[r+1][c+1]})+1;
         }
     }
     
