@@ -7,4 +7,4 @@ This repository contains all the competitive programming problems I've worked on
 - **C++**: Learnt C++ to the point where it begins to feel like a second home. Starting to use it much more often.
 
 Random thing: 
-I often see people write huge lists of macros and `#include <bits/stdc++>` in their C++ solutions. Not a big fan of that, but I might change my mind sometime down the road.
+I often see people write huge lists of macros and `#include <bits/stdc++.h>` in their C++ solutions. Not a big fan of that, but I might change my mind sometime down the road.
