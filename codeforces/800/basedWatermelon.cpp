@@ -1,12 +1,10 @@
-#include <concepts>
-#include <coroutine>
 #include <any>
-#include <bitsetv
+#include <bitset>
 #include <chrono>
 #include <csetjmp>
 #include <csignal>
 #include <cstdarg>
-#include <stddef>
+#include <cstddef>
 #include <cstdlib>
 #include <ctime>
 #include <functional>
@@ -19,9 +17,7 @@
 #include <utility>
 #include <variant>
 #include <memory>
-#include <memory_resource>
 #include <new>
-#include <scope_allocator>
 #include <limits>
 #include <array>
 #include <deque>
@@ -36,6 +32,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <bits/stdc++.h>
 define arcX template<class T
 #define arcXU arcX, class U
 arcX> using V = vector<T>; 
@@ -95,7 +92,7 @@ arcXU> T lstTrue(T lo, T ti, U f) {
 	return lo;
 }
 arcX> bool ckmin(T& a, const T& b) {
-	return b < a ? a = b, 1 : 0; } // set a = min(a,b)
+	return b < a ? a = b, 1 : 0; }
 arcX> bool ckmax(T& a, const T& b) {
 	return a < b ? a = b, 1 : 0; }
 void setIO(string name = "") {

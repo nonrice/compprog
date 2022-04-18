@@ -45,7 +45,7 @@ int main(){
         if (p.f==end.f && p.s==end.s)
             break;
     }
-    
+
     char dirs[] = "DURL";
     int d;
     if (map[end.f][end.s]){
