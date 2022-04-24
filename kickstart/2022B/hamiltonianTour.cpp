@@ -28,21 +28,25 @@ char dir_to_ch(int dir){
     }
 }
 
-void dfs_tree(tree_node[200][200] t, std::pair<int, int> cur, int cur_dir){
-    if (t[cur.f][cur.s].dirs.empty())
-        std::cout << dir_to_ch(dir+1);
+void dfs_tree(tree_node t[200][200], std::pair<int, int> cur, int cur_dir){
+    if (t[cur.f][cur.s].dirs.empty()){
+        std::cout << dir_to_ch(cur_dir);
+        std::cout << dir_to_ch(cur_dir+1);
+        std::cout << dir_to_ch(cur_dir+2);
+    }
     for (int dir:t[cur.f][cur.s].dirs){
         std::cout << dir_to_ch(dir);
-        dfs_tree(t, std::make_pair(dirs_r[dir], dirs_c[dir]), dir);
+        dfs_tree(t, std::make_pair(cur.f+dirs_r[dir], cur.s+dirs_c[dir]), dir);
         std::cout << dir_to_ch(dir+2);
     }
 }
 
-void solve(int case){
-    std::cout << "Case #" << case << ':';
+void solve(int caseno){
+    std::cout << "Case #" << caseno << ':';
     
     int h, w; std::cin >> h >> w;
     bool map[200][200];
+    map[0][0] = true;
     std::string row;
     for (int r=0; r<h; ++r){
         for (int c=0; c<w; ++c){
@@ -52,7 +56,7 @@ void solve(int case){
         }
     }
     
-    std::queue<std::pair<int, int>> bfs({0, 0});
+    std::queue<std::pair<int, int>> bfs({{0, 0}});
     tree_node t[200][200];
     int nr, nc;
     while (!bfs.empty()){
@@ -62,12 +66,10 @@ void solve(int case){
             nc = p.s+dirs_c[i];
             if (nr>=0 && nr<h && nc>=0 && nc<w && !map[nr][nc]){
                 bfs.emplace(nr, nc);
-                t[r][c].dirs.push_back(i);
+                t[p.f][p.s].dirs.push_back(i);
                 map[nr][nc] = true;
             }
         }
-        if (p.f==end.f && p.s==end.s)
-            break;
     }
     
     // check if bfs covered all
@@ -83,5 +85,10 @@ void solve(int case){
     std::cout << '\n';
 }
 
-
+int main(){
+    int cases; std::cin >> cases;
+    for (int c=1; c<=cases; ++c){
+        solve(c);
+    }
+}
 
