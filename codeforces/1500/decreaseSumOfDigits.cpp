@@ -18,7 +18,7 @@ ull solve(ull n, int s){
         if (sum_digits(n+p-n%p) <= s)
             return p-n%p;
     }
-    return 0Ull;
+    return 0ULL;
 }
 
 int main(){
