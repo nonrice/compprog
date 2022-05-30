@@ -10,6 +10,7 @@ set ts=4 sw=4 sts=4 ai et
 set bs=indent,eol,start
 set nu rnu
 set sc
+set is
 
 call plug#begin()
     Plug 'bfrg/vim-cpp-modern'
