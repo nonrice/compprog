@@ -15,7 +15,7 @@ void solve(){
             //pr[b][d] = pr[b][d-1] + (p[b-1]>p[d-1]);
         }
     }
-    
+
     /*
     for (auto& a : pr){
         for (int b : a){
