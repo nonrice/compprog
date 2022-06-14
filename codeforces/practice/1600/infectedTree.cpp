@@ -13,7 +13,7 @@ void dfs(vector<vector<int>>& adj, int cur, int prev, int kill, int& min_kill){
     }
 
     for (int v : adj[cur]) if (v != prev){
-        dfs(adj, v, cur, kill + (adj[cur].size()-1), min_kill);
+        dfs(adj, v, cur, kill + 2, min_kill);
     }
 }
 
