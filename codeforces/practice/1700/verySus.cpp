@@ -8,6 +8,7 @@ inline int sum(int n){
     //cout << ((n-k)/2 + 1)*4*k << '\n';
     //cout << (2-n%3)*4*k << '\n';
     return k*k*2 + (1 + n/3)*4*k - (2-n%3)*4*k;
+    // ^ simplifies to k*k*2 + 4*k*(n%3 - 1)
 }
 
 void solve(){
