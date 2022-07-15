@@ -4,7 +4,7 @@ This repository contains all my competitive programming stuff. Solutions are sor
 
 Ratings
 ---
-**CF:** `1279 / 1279`<br>
+**CF:** `1367 / 1367`<br>
 **LC:** `1674 / 1693`<br>
 **USACO:** `Silver`
 
