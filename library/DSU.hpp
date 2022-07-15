@@ -14,5 +14,5 @@ struct DSU {
     void merge(int u, int v){
         p[find(u)] = find(v);
     }
-}
+};
 
