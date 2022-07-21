@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 template <typename T>
 struct SegTree {
     vector<T> t;
@@ -26,4 +29,20 @@ struct SegTree {
         return total;
     }
 };
+
+int main(){
+    int n, q; cin >> n >> q;
+    vector<long long> a(n);
+    for (long long& v : a) cin >> v;
+
+    SegTree<long long> st(a);
+    while (q--){
+        int t, a, b; cin >> t >> a >> b;
+        if (t == 1){
+            st.modify(--a, b);
+        } else {
+            cout << st.query(--a, b) << '\n';
+        }
+    }
+}
 
