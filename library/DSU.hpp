@@ -6,7 +6,7 @@ struct DSU {
         while (sz--) p[sz] = sz;
     }
     
-    void find(int v){
+    int find(int v){
         if (v == p[v]) return v;
         return p[v] = find(p[v]);
     }
