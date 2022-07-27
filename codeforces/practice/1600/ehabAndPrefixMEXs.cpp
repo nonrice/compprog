@@ -12,7 +12,7 @@ int main(){
         cin >> v;
         c[v] = true;
     }
-    
+
     vector<int> b(n, -1);
     for (int i=1; i<n; ++i){
         if (a[i] != a[i-1]) b[i] = a[i-1];
