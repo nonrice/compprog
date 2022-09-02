@@ -7,7 +7,7 @@ const ll MOD = 998244353;
 
 ll binpow(ll a, ll b){
     ll ans = 1;
-    for (ll i=1; i<=b; i*=2){
+    for (ll i=1; i<=b; i<<=1){
         if (b&i) ans = ans*a % MOD;
         a = a*a % MOD;
     }
@@ -26,7 +26,7 @@ int main(){
     }
     
     // Fermat's little theorem
-    // y^-1 = y^(MOD-2)
+    // y^-1 = y^(MOD-2) (mod MOD)
     // requires gcf(y, MOD) = 1
     cout << x * binpow(y, MOD-2) % MOD << '\n';
 }
