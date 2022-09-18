@@ -1,11 +1,10 @@
 template <typename T>
 struct SegTree {
-    vector<T> t;
+    const vector<T>& t;
     int n;
     
-    SegTree(vector<T>& a){
-        n = a.size();
-        t = vector<T>(n*2);
+    SegTree(vector<T>& a) : t(a){
+        n = a.size()/2;
         for (int i=n*2-1; i>=0; --i){
             t[i] = (i >= n) ? a[i-n] : t[i*2]+t[i*2+1];
         }
