@@ -27,7 +27,6 @@ int main(){
     
     // Fermat's little theorem
     // y^-1 = y^(MOD-2) (mod MOD)
-    // requires gcf(y, MOD) = 1
     cout << x * binpow(y, MOD-2) % MOD << '\n';
 }
 
