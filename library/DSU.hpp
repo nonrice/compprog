@@ -1,8 +1,8 @@
 struct DSU {
-    vector<int> p;
+    int* p;
 
     DSU(int sz){
-        p = vector<int>(sz);
+        p = new int[sz];
         while (sz--) p[sz] = sz;
     }
     
@@ -11,8 +11,15 @@ struct DSU {
         return p[v] = find(p[v]);
     }
 
-    void merge(int u, int v){
-        p[find(u)] = find(v);
+    bool merge(int u, int v){
+        int up = find(u);
+        int vp = find(v);
+        p[up] = vp;
+        return up == vp;
+    }
+
+    ~DSU(){
+        delete[] p;
     }
 };
 
