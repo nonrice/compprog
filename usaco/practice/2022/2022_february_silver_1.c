@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int a[500][500];
-bool c[500][500]; // if you have gift i, can you recieve gift j? 
+bool c[500][500]; // if you offer gift i, can you recieve gift j? 
 
 int main(){
     int n; scanf("%d", &n);
