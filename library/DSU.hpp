@@ -1,8 +1,8 @@
 struct DSU {
 	int* p;
 
-	DSU(int sz){
-		p = new int[sz];
+	DSU(int* p, int sz){
+		this->p = p;
 		while (sz--) p[sz] = sz;
 	}
 	
@@ -16,10 +16,6 @@ struct DSU {
 		int vp = find(v);
 		p[up] = vp;
 		return up == vp;
-	}
-
-	~DSU(){
-		delete[] p;
 	}
 };
 
