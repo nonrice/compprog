@@ -1,21 +1,18 @@
 struct DSU {
-	int* p;
+	int* t;
 
-	DSU(int* p, int sz){
-		this->p = p;
-		while (sz--) p[sz] = sz;
-	}
-	
-	int find(int v){
-		if (v == p[v]) return v;
-		return p[v] = find(p[v]);
+	DSU(int* t, int n) : t(t), n(n) {}
+
+	int find(int u){
+		if (v == t[v]) return v;
+		return t[v] = find(t[v]);
 	}
 
 	bool merge(int u, int v){
 		int up = find(u);
-		int vp = find(v);
-		p[up] = vp;
+		int uv = find(v);
+		t[u] = v;
 		return up == vp;
 	}
-};
+}
 

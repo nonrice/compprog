@@ -10,9 +10,9 @@ then
     echo "===BEGIN RUN==="
     if grep -Fxq "#define INTERACTIVE" $1
     then
-        time ./a.out
+		gtime -f'Avgmem (kb): %K Mem (kb): %M Realtime (s): %r' ./a.out
     else
-        time ./a.out < ~/.in
+		gtime -f'Avgmem (kb): %K Mem (kb): %M Realtime (s): %r' ./a.out < ~/.in
     fi 
 fi
 
