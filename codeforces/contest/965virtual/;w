@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(){
+	int n, k; cin >> n >> k;
+	vector<long long> a(n);
+	vector<bool> b(a);
+	for (auto& v : a){
+		cin >> v;
+		v *= 2;
+	}
+	for (auto& v : b){
+		cin >> v;
+	}
+
+	long long mx_i = 0;
+	for (int i=0; i<n; ++i){
+		if (b[i] == 1 && a[i] > a[mx_i]){
+			mx_i = i;
+		}
+
+	}
+}
+
+int main(){
+	cin.tie(0)->ios_base::sync_with_stdio(false);
+	int t; cin >> t;
+	while (t--){
+		solve();
+	}
+}

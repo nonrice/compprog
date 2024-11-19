@@ -44,7 +44,8 @@ void solve(){
 			++ans_cnt;
 		}
 	}
-	
+	i
+	f
 	cout << ans_cnt << '\n';
 	for (int i=0; i<ans_cnt; ++i){
 		cout << ans[2*i] << ' ' << ans[1+2*i] << '\n';
