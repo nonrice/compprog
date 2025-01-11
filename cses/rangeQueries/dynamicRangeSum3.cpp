@@ -7,25 +7,27 @@ struct st_node {
 	int l_s, r_s;
 	long long x = 0;
 	
-	st_node(int l, int r) : l_s(l), r_s(r) {
-		if (l != r){
-			int m = (l+r)/2;
-			l_ch = new st_node(l, m);
-			r_ch = new st_node(m+1, r);
-		}
-	}
+	st_node(int l, int r) : l_s(l), r_s(r) {}
 
 	void set(int i, long long y){
+		int m = (l_s+r_s)/2;
+
 		if (l_s == r_s){
 			x = y;
 			return;
 		}
-		if (i <= (l_s+r_s)/2){
+		if (i <= m){
+			if (l_ch == nullptr){
+				l_ch = new st_node(l_s, m);
+			}
 			l_ch->set(i, y);
 		} else {
+			if (r_ch == nullptr){
+				r_ch = new st_node(m+1, r_s);
+			}
 			r_ch->set(i, y);
 		}
-		x = l_ch->x + r_ch->x;
+		x = (l_ch!=nullptr ? l_ch->x : 0) + (r_ch!=nullptr ? r_ch->x : 0);
 	}
 
 	long long query(int l, int r){
@@ -34,7 +36,7 @@ struct st_node {
 		}
 		int m = (l_s+r_s)/2;
 		if (l <= m && r >= m+1){
-			return l_ch->query(l, r) + r_ch->query(l, r);
+			return (l_ch!=nullptr ? l_ch->query(l, r) : 0) + (r_ch!=nullptr ? r_ch->query(l, r) : 0);
 		}
 		if (r < m+1){
 			return l_ch->query(l, r);
@@ -42,7 +44,7 @@ struct st_node {
 		if (l > m){
 			return r_ch->query(l, r);
 		}
-		throw runtime_error("bad query");
+		return -1;
 	}
 };
 

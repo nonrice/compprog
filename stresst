@@ -1,0 +1,98 @@
+#!/usr/bin/python3
+
+import subprocess, argparse, os
+
+CXXFLAGS = "-std=c++17 -O2 -Wall -Wextra -fsanitize=address,undefined -g -DLOCAL"
+CXX_COMPILER = "/usr/bin/clang++"
+PYTHONPATH = "/Users/eric/miniforge3/bin/python3"
+JAVA_HOME = "/Library/Java/JavaVirtualMachines/temurin-22.jdk/Contents/Home/"
+JAVA = os.path.join(JAVA_HOME, "bin/java")
+JAVAC = os.path.join(JAVA_HOME, "bin/javac")
+
+def compile_prog(filename: str):
+    name, ext = os.path.splitext(filename)
+
+    if ext == ".cpp":
+        subprocess.run(f"{CXX_COMPILER} {filename} {CXXFLAGS} -o {name}", shell=True)
+    elif ext == ".java":
+        subprocess.run(f"{JAVAC} {filename}", shell=True)
+
+def run_prog(filename: str, stdin: str=""):
+    name, ext = os.path.splitext(filename)
+
+    stdin_enc = stdin.encode("utf-8")
+
+    proc = None 
+    if ext == ".cpp":
+        proc = subprocess.run(f"./{name}", input=stdin_enc, capture_output=True, shell=True)
+    elif ext == "":
+        proc =  subprocess.run(f"./{filename}", input=stdin_enc, capture_output=True, shell=True)
+    elif ext == ".py":
+        proc = subprocess.run(f"python3 {filename}", input=stdin_enc, capture_output=True, shell=True)
+    elif ext == ".java":
+        proc = subprocess.run(f"{JAVA} {name}", input=stdin_enc, capture_output=True, shell=True)
+    
+    return proc.stdout.decode("utf-8")
+
+def clean_prog(filename: str):
+    name, ext = os.path.splitext(filename)
+
+    if ext == ".cpp":
+        subprocess.run(f"rm {name}", shell=True)
+    elif ext == ".java":
+        subprocess.run(f"rm {name}.class", shell=True)
+    
+def stresst(main_file: str, brute_file: str, gen_file: str, store_files: bool, reps: int=1):
+    compile_prog(main_file);
+    compile_prog(brute_file);
+    compile_prog(gen_file);
+    for test_no in range(1, reps+1):
+        print(f"Running test {test_no}... ", end="", flush=True)
+        test = run_prog(gen_file)
+        out_main = run_prog(main_file, test)
+        out_brute = run_prog(brute_file, test)
+        if out_main == out_brute:
+            print("passed")
+        else:
+            print("failed")
+            print("Failing case:")
+            print(test)
+            print("Brute output:")
+            print(out_brute)
+            print("Main output:")
+            print(out_main)
+            if store_files:
+                with open("fail_test.txt", "w") as f:
+                    f.write(test)
+                with open("fail_brute_output.txt", "w") as f:
+                    f.write(out_brute)
+                with open("fail_main_output.txt", "w") as f:
+                    f.write(out_main)
+                print("test case and outputs written to fail_test.txt, fail_brute_output.txt, fail_main_output.txt")
+            return
+    print("All tests passed.")
+    clean_prog(main_file)
+    clean_prog(brute_file)
+    clean_prog(gen_file)
+
+def main():
+    parser = argparse.ArgumentParser(prog="stresst", description="stress testing program for competitive programming")
+    parser.add_argument("main", type=str, help="file containing main program")
+    parser.add_argument("brute", type=str, help="file containing brute force (correct) program")
+    parser.add_argument("gen", type=str, help="file containing testcase generator program")
+    parser.add_argument("-n", type=int, default=1, help="number of tests to run")
+    parser.add_argument("-f", action="store_true", help="save output to files")
+    args = parser.parse_args()
+    stresst(args.main, args.brute, args.gen, args.f, args.n)
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+        
+

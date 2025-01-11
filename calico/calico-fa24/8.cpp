@@ -43,6 +43,7 @@ void solve(){
 	vector<vector<vector<vector<vector<int>>>>> vis(n, vector<vector<vector<vector<int>>>>(m, vector<vector<vector<int>>>(k+1, vector<vector<int>>(4, vector<int>(2, false)))));
 	bfs.push_front({ sr, sc, k, 0, true });
 	d[sr][sc][k][0][true] = 0;
+	cout << "asdf" << endl;
 
 	auto relax = [&](vert u, vert v, int w){
 		if (d[u.r][u.c][u.e][u.p][u.h]+w<d[v.r][v.c][v.e][v.p][v.h]){
@@ -55,12 +56,15 @@ void solve(){
 		}
 	};
 
+	cout << "asdf" << endl;
+	int rem = n*m;
 	while (!bfs.empty()){
 		vert u = bfs.front(); bfs.pop_front();
 		if (vis[u.r][u.c][u.e][u.p][u.h]){
 			continue;
 		}
 		vis[u.r][u.c][u.e][u.p][u.h] = true;
+		cout << rem << endl;
 
 
 		//cout << u.r << ' ' << u.c << ' ' << u.e << ' ' << u.p << '\n';
