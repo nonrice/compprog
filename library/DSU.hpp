@@ -1,23 +1,21 @@
-// DSU
-// DSU: Construct DSU structure with path compression and union by size for graph of n vertices.
-// find: Get the representative node for node u in O(alpha(n))
-// merge: Merge the components of node u and v in O(alpha(n))
-
 struct DSU {
 	vector<int> t;
 	vector<int> sz;
 
+	// construct DSU for vertices [0, n-1]
 	DSU(int n){
-		t = vector<int>(n+1);
-		sz = vector<int>(n+1, 1);
+		t = vector<int>(n);
+		sz = vector<int>(n, 1);
 		iota(t.begin(), t.end(), 0);
 	}
 
+	// get representative for vertice u
 	int find(int u){
 		if (u == t[u]) return u;
 		return t[u] = find(t[u]);
 	}
 
+	// merge components of u and v, return false if they were not merged prior
 	bool merge(int u, int v){
 		int pu = find(u);
 		int pv = find(v);

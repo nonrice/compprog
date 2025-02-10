@@ -1,6 +1,4 @@
-// Binary Exponentation
-// binpow: Computes a^b (mod m) in O(log(b)).
-
+// fast computation of a^b mod m
 long long binpow(long long a, long long b, long long m){
 	long long ans = 1;
 	while (b){

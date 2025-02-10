@@ -1,11 +1,8 @@
-// String prefix hashing
-// polyhash: construct prefix hash of s using modulus m and base b in O(n)
-// substr: hash the substring of [l, r) in O(1)
-
 struct polyhash {
 	long long m, b;
 	vector<long long> p;
 	
+	// Construct prefix hash of s with modulus m and base b
 	polyhash(const string& s, long long m, long long b) : m(m), b(b) {
 		p = vector<long long>(s.size()+1);
 		long long bp = 1;
@@ -14,8 +11,11 @@ struct polyhash {
 			bp = bp*b % m;
 		}
 	}
- 
+	
+	// hash substring on [l, r)
 	long long substr(int l, int r){
 		return ((p[r] - p[l] + m) % m) * binpow(binpow(b, l, m), m-2, m) % m;
 	}
 };
+
+
