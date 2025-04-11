@@ -1,9 +1,9 @@
 template<typename T, typename U>
 // compute shortest path distances and path trees from source s 
-pair<map<T, U>, map<T, T>> dijkstra(map<T, vector<pair<T, U>>>& adj, T s){
-    map<T, U> d;
-    map<T, T> p;
-    map<T, bool> vis;
+pair<vector<U>, vector<U>> dijkstra(vector<vector<pair<T, U>>>& adj, T s, T n){
+    vector<U> d(n+1);
+    vector<T> p(n+1);
+    vector<bool> vis(n+1);
     priority_queue<pair<U, T>, vector<pair<U, T>>, greater<pair<U, T>>> q;
     d[s] = U{};
     q.emplace(U{}, s);

@@ -1,29 +1,22 @@
-// fast computation of a^b mod m
-long long binpow(long long a, long long b, long long m){
-    long long ans = 1;
-    while (b){
-        if (b&1) ans = ans*a%m;
-        a = a*a%m;
-        b >>= 1;
-    }
-    return ans;
-}
+// create NCR calculator up for n,k<=N under modulo M
+template<int N, long long M>
+struct NCR {
+    mod_int<M> f[N+1], fi[N+1];
 
-constexpr int NCR_MAX = 1e6;
-long long f[NCR_MAX+1] = { 1 }, fi[NCR_MAX+1] = { 1 };
-
-// precompute factorials and inverse factorials modulo m up to NCR_MAX
-void NCR_precomp(long long m){
-    for (int i=1; i<=NCR_MAX; ++i){
-        f[i] = f[i-1]*i%m;
-        fi[i] = binpow(f[i], m-2, m);
+    NCR(){
+        f[0] = 1;
+        fi[0] = 1;
+        for (int x=1; x<=N; ++x){
+            f[x] = f[x-1]*x;
+            fi[x] = fi[x-1]/x;
+        }
     }
-}
 
-// compute n choose k modulo m
-long long NCR(int n, int k, long long m){
-    if (n<k){
-        return 0;
+    mod_int<M> operator()(int n, int r){
+        if (n<r){
+            return 0;
+        }
+        return f[n]*fi[n-r]*fi[r];
     }
-    return f[n]*fi[n-k]%m*fi[k]%m;
-}
+};
+
